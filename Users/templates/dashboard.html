@@ -1,0 +1,162 @@
+{% extends 'user-dashboard-base.html' %}
+{% load static %}
+{% load humanize %}
+{% block content %}
+<div class="user-content">
+    <div class="user-panel">
+        <div class="row">
+          
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="tile-item tile-light">
+                            <div class="tile-bubbles"></div>
+                            <h6 class="tile-title">WALLET BALANCE</h6>
+                            <ul class="tile-info-list">
+                                <li><span>${{user.user_wallet.current_balance|intcomma}}</span></li>
+                              
+                            </ul>
+                            <div  class="tile-title">
+                                Available Balance : 
+                                <span style="">
+                                    ${{user.user_wallet.available_balance|intcomma}}
+                                </span><br>
+                                
+                                {% if pending_deposit %}
+                                Pending Deposit : 
+                                <span style="color: green;">
+                                    +${{pending_deposit}}
+                                </span><br>
+                               
+                                {% endif %}
+                                {% if pending_withdrawal %}
+                                Pending Withdrawal :  
+                                <span style="color: red;">
+                                    -${{pending_withdrawal}}
+                                </span>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+               
+                </div>
+              
+            </div><!-- .col -->
+         
+        </div><!-- .row -->
+ 
+        <!--div class="token-card">
+            <div class="token-info">
+                <span class="token-smartag">ICO Phase 2</span>
+                <h2 class="token-bonus">20% <span>Current Bonus</span></h2>
+                <ul class="token-timeline">
+                    <li><span>START DATE</span>14 Jul 2018</li>
+                    <li><span>END DATE</span>25 Aug 2018</li>
+                </ul>
+            </div>
+            <div class="token-countdown">
+                <span class="token-countdown-title">THE BONUS END IN</span>
+                <div class="token-countdown-clock" data-date="2021/08/10"></div>
+            </div>
+        </div><!-- .token-card -->
+     
+        <div class="progress-card">
+            
+            <h4>Investments  Progress 
+
+            </h4>
+            {% if user.active_investments %}
+            
+                {% for investment in user.active_investments %}
+                <div>
+                    <h3 class=""><span style="font-size: 15px;color:inherit">Plan </span>-> {{investment.plan}}</h3>
+                    <p>
+                        <span>Capital  -${{investment.amount|intcomma}}</span> 
+                        <!--span style="float: right;">Started on -{{investment.plan_start.date}}</span-->
+                    </p>
+                     
+              
+                    <ul class="progress-info">
+                        <li><span>Earned -</span> ${{investment.current_earning|intcomma}}</li>
+                        <li><span>Expected -</span> ${{investment.expected_earning|intcomma}}</li>
+                    </ul>
+                    <div class="progress-bar">
+                    
+                        <div class="progress-percent" style="width:{{investment.plan_progress}}%"></div>
+                    </div>
+                   
+                </div>
+                {% endfor %}
+            {% else %}    
+            <div class="status status-empty">
+                <div class="status-icon">
+                    <em class="ti ti-files"></em>
+                    <div class="status-icon-sm">
+                        <em class="ti ti-close"></em>
+                    </div>
+                </div>
+                <span class="status-text"> You have no running investment at the moment.</span>
+                <center>
+                    <span>
+                        <a style="font-size: 18px;" href="{% url 'plans' %}">Invest</a></span>
+                    </span>
+                </center>
+            </div> 
+           
+     
+            {% endif %}
+        </div>
+        
+        <div class="gaps-3x"></div>
+        <div class="table-responsive">
+            <h4>Recent Transactions
+                {% if  recent_transactions %}
+                <span style="float: right;"><a href="{% url 'transaction' %}">View all</a></span>
+                 {% endif %}
+            </h4>
+
+              
+        {% if not recent_transactions %}
+         <div class="status status-empty">
+            <div class="status-icon">
+                <em class="ti ti-files"></em>
+                <div class="status-icon-sm">
+                    <em class="ti ti-close"></em>
+                </div>
+            </div>
+            <span class="status-text">You have no transactions yet</span>
+
+        </div> 
+        {% else %}
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>TRX REF.</th>
+                        <th>Amount</th>
+                        <th>TRX Type</th>
+                        <th>Payment method</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tx in recent_transactions %}
+                    <tr>
+                        <td>{{tx.transaction_id}}</td>
+                        <td>${{tx.amount}}</td>
+                        <td>{{tx.transaction_type}}</td>
+                        <td>{{tx.coin}}</td>
+                        <td><span>{{tx.date}}</span></td>
+                       
+                    </tr>
+                    {% endfor %}
+                 
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+        
+    </div><!-- .user-panel -->
+</div><!-- .user-content -->
+
+{% endblock %}

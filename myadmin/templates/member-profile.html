@@ -1,0 +1,73 @@
+{% extends 'dashboard-base.html' %}
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block css %}
+{% endblock %}
+{% block content %}
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+            <div class="section-body">
+                <div class="row mt-sm-4">
+                    <div class="col-12 col-md-12 col-lg-5">
+                        <div class="card author-box">
+                            <div class="card-body">
+                                <div class="author-box-center">
+                                  {% if user.picture %}
+                                    <img style="width:80px;height:80px;border-radius: 50%;" alt="image" src="{{user.picture.url}}">
+                                  
+                                  {% endif %}
+                                    <div class="clearfix"></div><br>
+                                        <div class="author-box-name">
+                                           {{user}}
+                                        </div>
+                                        <div class="author-box-job" style="font-size:19px">
+                                    
+                                        </div>
+                                    </div>
+
+                                <div class="text-center">
+                                    <div class="author-box-description">
+                                        <p>
+                                           <b>Current Total Earning : ${{total_earning}}</b> 
+                                        </p>
+                                    </div>
+                                </div>
+                           
+               
+                            </div>
+                        </div>
+                    </div>        
+              <div class="col-12 col-md-12 col-lg-7">
+                    <div class="card">
+                            <form style="margin:15px" action="" class="needs-validation"  method="POST">
+                             {% csrf_token %}
+                             {{form|crispy}}
+                              <div class="card-footer text-right">
+                                <button class="btn btn-primary">Update</button>
+                              </div>
+                            </form>
+                          </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        </div>
+        
+        {% endblock %}
+
+  {% block js %}
+  <!-- General JS Scripts -->
+  <script src="{% static 'dashboard/js/app.min.js' %}""></script>
+  <!-- JS Libraies -->
+  <script src="{% static 'dashboard/bundles/summernote/summernote-bs4.js' %}""></script>
+  <!-- Page Specific JS File -->
+  <!-- Template JS File -->
+  <script src="{% static 'dashboard/js/scripts.js' %}""></script>
+  <!-- Custom JS File -->
+  <script src="{% static 'dashboard/js/custom.js' %}""></script>
+  {% endblock %}
+
