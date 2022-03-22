@@ -33,6 +33,20 @@
     <link rel="stylesheet" href="{% static 'main-theme/css/style.css' %}">
     <!-- Responsive  CSS -->
     <link rel="stylesheet" href="{% static 'main-theme/css/responsive.css' %}">
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+	var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+	(function(){
+	var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+	s1.async=true;
+	s1.src='https://embed.tawk.to/62393df41ffac05b1d7fc041/1funpk1k5';
+	s1.charset='UTF-8';
+	s1.setAttribute('crossorigin','*');
+	s0.parentNode.insertBefore(s1,s0);
+	})();
+	</script>
+	<!--End of Tawk.to Script-->
 </head>
 
 <body>
@@ -86,6 +100,7 @@
 					</div>
 					<!-- end col -->
 				</div>
+				<div id="google_translate_element"></div>
 			</div>
 		</div>
 		<!-- END LOGO AREA -->
@@ -142,6 +157,7 @@
 		<!-- END NAVIGATION AREA -->	
 	</header>
 	<!-- END HEADER SECTION -->
+
 		{% block content %} {% endblock %}
     <!-- START FOOTER -->
     <footer>
@@ -207,6 +223,15 @@
     </footer>
     <!-- END FOOTER -->
 	
+
+	<script type="text/javascript">
+		function googleTranslateElementInit() {
+		  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+		}
+	</script>
+		
+	<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+	
 	<!-- Latest jQuery -->
     <script src="{% static 'main-theme/js/jquery-2.2.4.min.js' %}""></script>
     <!-- popper js -->
@@ -226,7 +251,7 @@
     <!-- venobox js -->
     <script src="{% static 'main-theme/venobox/js/venobox.min.js' %}""></script>
     <script src="{% static 'main-theme/js/masonry.pkgd.min.js' %}""></script>
-    <!-- scroll to top js -->
+    <!-- scroll to top js ->
     <script src="{% static 'main-theme/js/scrolltopcontrol.js' %}""></script>
     <!-- WOW - Reveal Animations When You Scroll -->
     <script src="{% static 'main-theme/js/wow.min.js' %}""></script>
