@@ -13,11 +13,11 @@
 					<div class="row">
 						<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 							<div class="home-single-slide-dec">
-								<h2>Secure & easy way to <br> buy & sell bitcoin</h2>
-								<p class="text-capitalize">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+								<h2>Secure & easy way to <br> invest in digital assets</h2>
+								<p class="text-capitalize">Enjoy the quality years of experience on digital asset investment when you trade with our brokers</p>
 								<div class="home-single-slide-button">
-									<a href="#" class="btn-style btn-filled">Learn More</a>
-									<a href="#" class="btn-style btn-border">Bitcoin Price</a>
+									<a href="#about" class="btn-style btn-filled">Learn More</a>
+									<a href="#investment-plans" class="btn-style btn-border">investment options</a>
 								</div>
 							</div>
 						</div>
@@ -33,11 +33,11 @@
 					<div class="row">
 						<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 							<div class="home-single-slide-dec">
-								<h2>bitcoin & ethereum transper you can trust </h2>
-								<p class="text-capitalize">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+								<h2>$0 upfront commision fees. we earn when you earn.</h2>
+								<p class="text-capitalize">we care about your profits more than you do. </p>
 								<div class="home-single-slide-button">
-									<a href="#" class="btn-style btn-border">Get quote</a>
-									<a href="#" class="btn-style btn-filled">Read More</a>
+									<a href="{% url 'register' %}" class="btn-style btn-border">Get started</a>
+									<a href="#features" class="btn-style btn-filled">Read More</a>
 								</div>
 							</div>
 						</div>
@@ -53,12 +53,9 @@
 					<div class="row">
 						<div class="col-lg-7 col-md-10 col-12 mr-auto text-left">
 							<div class="home-single-slide-dec">
-								<h2>Invest & double your desire bitcoin</h2>
-								<p class="text-capitalize">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-								<div class="home-single-slide-button">
-									<a href="#" class="btn-style btn-filled">Contact Us</a>
-									<a href="#" class="btn-style btn-border">View More</a>
-								</div>
+								<h2>Lower risks, higher investment security and ROI</h2>
+								<p class="text-capitalize">we employ state of the art trading and analytical algorithms on semi-automated and machine learning enabled bots that make the best trading decisions</p>
+								
 							</div>
 						</div>
 					</div>
@@ -72,28 +69,28 @@
 
 
 <!-- START PROMO SECTION -->
-<section id="about" class="section-padding bg-gray">
+<section id="about" class="section-padding bg-gray" style="padding:20px">
 	<div class="container">
 		<div class="row">
 
-			<div class="col-lg-6 col-md-6 col-12">
+			<div class="col-lg-6 col-md-6 col-12 py-3">
 				
 				<div class="promo-content">
 					<h3>Who we are?</h3>
-					<p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illodrut inventore veritatis et quasi architecto beatae vitae dicta sunt. </p>
-					
+					<p>
+						{{site_name}} is a leading cryptocurrency and blockchain bassed digital asset trading company, guaranteed and regulated by the cyprus securities and exchange commision.
+						with a hand full of dedicated team and staff well experienced in digital trading, portfolio management, asset staking, etc. the myriads of digital assets within our trading portfolio includes, cryptocurrency, defi, NFT's,etc.
+					</p>
 					
 				</div>	
 			</div>
 			<!-- end col -->
-
-
 			<div class="col-lg-6 col-md-6 col-12 mb-lg-0 mb-md-4 mb-sm-4 mb-4">
 				<div class="image-style-1 mb-4">
 					<div class="image-style-wrapper">
 						<div class="image-one"></div>
 						<div class="image-two">
-							<img src="{% static 'main-theme/img/bg/promobg1.jpg' %}" class="img-fluid" alt="">
+							<img src="{% static 'main-theme/img/bg/about.png' %}" class="img-fluid" alt="">
 						</div>
 					</div>
 				</div>
@@ -114,7 +111,7 @@
 		<div class="row">
 			<div class="col-12 text-center">
 				<div class="section-title">
-					<h5>why buy & sell</h5>
+					<h5>top blockchain investment company</h5>
 					<h3>{{site_name}}<span>  Features</span></h3>
 				</div>
 			</div>
@@ -128,9 +125,12 @@
 							<div class="single-wcus-icon">
 								<i class="icofont icofont-bill"></i>
 							</div>
+							<span  class="pl-4">
+								<h5 > &nbsp; &nbsp; Easy & Secured Trading</h5>
+							</span>
 							<div class="single-wcus-text">
-								<h5>Easy Trading</h5>
-								<p>Lorem ipsum dolor sit ametelid consectetur adipiscing elit sedd eiusmod tempor.</p>
+								
+								<p>we have managed to simplify blockchain investment for everyone. Our state of the art fully secured and feature-enriched <a href="{% url 'dashboard' %}">User Dashboard</a> makes fund deposit, asset investment, management and withdrawal an easy fit.</p>
 							</div>
 						</div>
 					</div>
@@ -140,9 +140,12 @@
 							<div class="single-wcus-icon">
 								<i class="icofont icofont-coins"></i>
 							</div>
+							<span  class="pl-4">
+								<h5 > &nbsp; &nbsp;Trading Strategy</h5>
+							</span>
 							<div class="single-wcus-text">
-								<h5>Trading Strategy</h5>
-								<p>Lorem ipsum dolor sit ametelid consectetur adipiscing elit sedd eiusmod tempor.</p>
+								
+								<p>At {{site_name_full}} we employ in house technologies such as AI bots, trading algoritms that maximizes profits on asset trading and informs our well experienced brokers on where your money should go, to ensure you are only left with smiles  when you peep at your portfolio at the end of the day.</p>
 							</div>
 						</div>
 					</div>
@@ -152,9 +155,12 @@
 							<div class="single-wcus-icon">
 								<i class="icofont icofont-money"></i>
 							</div>
+							<span  class="pl-4">
+								<h5 > &nbsp; &nbsp; Fast Withdrawal</h5>
+							</span>
 							<div class="single-wcus-text">
-								<h5>Money Exchange</h5>
-								<p>Lorem ipsum dolor sit ametelid consectetur adipiscing elit sedd eiusmod tempor.</p>
+								
+								<p> Withdrawing your funds from your {{site_name}} wallet is easier than making a coffee, infact you get your funds transfered to your provided personal wallet address. faster than the times it takes to empty a cup of coffee.</p>
 							</div>
 						</div>
 					</div>
@@ -164,9 +170,12 @@
 							<div class="single-wcus-icon">
 								<i class="icofont icofont-ui-travel"></i>
 							</div>
+							<span  class="pl-4">
+								<h5 > &nbsp; &nbsp; High Security</h5>
+							</span>
 							<div class="single-wcus-text">
-								<h5>Security Ensure</h5>
-								<p>Lorem ipsum dolor sit ametelid consectetur adipiscing elit sedd eiusmod tempor.</p>
+								
+								<p>Your assets and accounts are highly secured, the former by our very rugged insurance policies and process, the later by our state of the art cryptographic and encryption algorithms and systems. we got you completely protected.</p>
 							</div>
 						</div>
 					</div>
@@ -177,9 +186,9 @@
 			<div class="col-lg-4 col-md-4 col-12">
 				<div class="single-wcus-promo">
 					<div class="single-wcus-promo-inner">
-						<h3>We are ready to fly with you.</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolor.</p>
-						<a href="#" class="btn-style btn-border btn-border-2">Read More</a>
+						<h3>We are ready to fly with you, whenever you are ready.</h3>
+						<p>Create a completely free account to join the bull run, we have myriads of investment options that suits every one, you included.</p>
+						<a href="{% url 'register' %}" class="btn-style btn-border btn-border-2">Create Account</a>
 					</div>
 				</div>
 			</div>
@@ -280,13 +289,7 @@
 			</div>
 			<!-- end single service -->
 		</div>
-		<div class="row mt-5">
-			<div class="col-12 text-center">
-				<div class="serviceall-btn wow fadeInDown">
-					<a href="#">Check All Services <i class="icofont icofont-long-arrow-right"></i></a>
-				</div>
-			</div>
-		</div>	
+		
 	</div>
 	<!--- END CONTAINER -->
 </section>
@@ -343,32 +346,34 @@
 	<div class="container">
 		<div class="row">	 
 			<div class="col-lg-6 col-md-6 col-12">	 
-				<div class="row text-center counter-wrapper">	 
+				<div class="row text-center counter-wrapper">
+					
 					<div class="col-lg-6 col-md-6 col-12 counter-wrapper-inner">
 						<div class="single-counter">
-							<h3 class="timer">56</h3>
-							<p>Bitcoin</p>
+							<h3 style="font-size:55px"  class="timer">40462</h3>
+							<p>Accounts</p>
+						</div>							
+					</div>
+					<!-- end col -->
+					<div class="col-lg-6 col-md-6 col-12 counter-wrapper-inner">
+						<div class="single-counter">
+							<span style="font-size: 38px;">$</span><h3 style="font-size:55px"  class="timer">5320000</h3>
+							<p>Liquidity</p>
 						</div>							
 					</div>
 					<!-- end col -->	 
 					<div class="col-lg-6 col-md-6 col-12 counter-wrapper-inner">
 						<div class="single-counter">
-							<h3 class="timer">95</h3>
-							<p>Wallet</p>
+							<span style="font-size: 38px;">$</span><h3 style="font-size:55px" class="timer">637374372</h3>
+							<p>Withdrawals</p>
 						</div>							
 					</div>
 					<!-- end col -->	 
+					 
 					<div class="col-lg-6 col-md-6 col-12 counter-wrapper-inner">
 						<div class="single-counter">
-							<h3 class="timer">85</h3>
-							<p>ATM</p>
-						</div>							
-					</div>
-					<!-- end col -->	 
-					<div class="col-lg-6 col-md-6 col-12 counter-wrapper-inner">
-						<div class="single-counter">
-							<h3 class="timer">68</h3>
-							<p>Client</p>
+							<span style="font-size: 38px;">$</span><h3 style="font-size:55px"  class="timer">4354740</h3>
+							<p>Active investments</p>
 						</div>							
 					</div>
 					<!-- end col -->
@@ -388,8 +393,8 @@
 		<div class="row">
 			<div class="col-12 text-center">
 				<div class="section-title">
-					<h5>Bitfonix conversation</h5>
-					<h3>Trade Bitcoin <span>With Us</span></h3>
+					<h5>invest with us</h5>
+					<h3>Portfolio <span>Statistics</span></h3>
 				</div>
 			</div>
 		</div>

@@ -9,6 +9,7 @@ def core(request) :
     
     ctx['site_name_verbose'] = "Zealkoin"
     ctx['site_name'] = "Zealkoin"
+    ctx['site_name_full'] = "Zealkoin ltd."
     ctx['support_email'] = "support@nintrend.ltd"
     ctx['site_email'] = "support@nintrend.ltd"
     ctx['site_phone'] = "+3594858"
