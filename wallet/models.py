@@ -185,6 +185,7 @@ class Wallet(models.Model) :
     funded_earning = models.FloatField(default = 0.0) 
     withdrawals = models.FloatField(default = 0.0) 
     withdrawal_allowed = models.BooleanField(default=False)
+    allow_automatic_investment = models.BooleanField(default=True)
 
     def debit(self,amount) :
         self.initial_balance -= amount

@@ -124,7 +124,7 @@ class Invest(LoginRequiredMixin,View)  :
             investment = form.save()
             self.add_referee_earning(investment)
 
-            if investment.approve_investments() :
+            if investment.approve_investments() or not user.user_wallet.allow_automatic_investment :
                 msg = "You have succesfully subscribed to the {} investment plan (pending approval), with an initial capital of ${}".format(
                     form.instance.plan.name,
                     form.cleaned_data['amount']
