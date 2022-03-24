@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load mytags %}
+{% load humanize %}
 
 {% block content %}
 <!-- START SLIDER SECTION -->
@@ -358,7 +359,7 @@
 					<!-- end col -->
 					<div class="col-lg-6 col-md-6 col-12 counter-wrapper-inner">
 						<div class="single-counter">
-							<span style="font-size: 38px;">$</span><h3 style="font-size:55px"  class="timer">5320000</h3>
+							<span style="font-size: 38px;">$</span><h3 style="font-size:55px"  class="timer">{{liquidity}}</h3>
 							<p>Liquidity</p>
 						</div>							
 					</div>
@@ -406,56 +407,54 @@
 					<table class="bitland-table table table-striped table-hover">
 						<thead>
 							<tr>
-								<th scope="col">Cryptocurrency</th>
-								<th scope="col">Price</th>
-								<th scope="col">24% Change</th>
-								<th scope="col">Supppy</th>
-								<th scope="col">24% Volume</th>
+								<th scope="col">Investment type</th>
+								<th scope="col">funds</th>
+								<th scope="col">pool %</th>
+							
+							
+							
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<th scope="row"><i class="icofont icofont-cur-baht"></i> Bitcoin</th>
-								<td>85.78$</td>
-								<td>34.29%</td>
-								<td>427BTC</td>
-								<td>34,89</td>
+					        <tr>
+								<th scope="row"><i class="fas fa-shekel-sign"></i>
+									Crypto projects
+								</th>
+						
+								<td>{{liquidity|intdivide:"35"|intcomma}} $</td>
+								<td>35%</td>
+								
 							</tr>
 							<tr>
-								<th scope="row"><i class="icofont icofont-cur-dollar"></i> Bitfonix</th>
-								<td>97.45$</td>
-								<td>45.20%</td>
-								<td>492BTC</td>
-								<td>67.82</td>
+								<th scope="row"><i class="fas fa-shekel-sign"></i> 
+									Lending 
+								</th>
+								
+								<td>{{liquidity|intdivide:"20"|intcomma}} $</td>
+								<td>20%</td>
+								
 							</tr>
+							
 							<tr>
-								<th scope="row"><i class="fas fa-shekel-sign"></i> Degitalcash</th>
-								<td>45.89$</td>
-								<td>23.96%</td>
-								<td>635BTC</td>
-								<td>23.57</td>
+								<th scope="row"><i class="fas fa-shekel-sign"></i> 
+									Yield farming & staking
+								</th>
+								
+								<td>{{liquidity|intdivide:"27"|intcomma}} $</td>
+								<td>27%</td>
+						
 							</tr>
+
 							<tr>
-								<th scope="row"><i class="icofont icofont-cur-euro-true"></i> Ethereum</th>
-								<td>78.35$</td>
-								<td>84.78%</td>
-								<td>395BTC</td>
-								<td>67.10</td>
+								<th scope="row"><i class="fas fa-shekel-sign"></i> 
+									Exchange
+								</th>
+
+								<td>{{liquidity|intdivide:"18"|intcomma}} $</td>
+								<td>18%</td>
+						
 							</tr>
-							<tr>
-								<th scope="row"><i class="icofont icofont-cur-dollar-plus"></i> Stellar</th>
-								<td>45.89$</td>
-								<td>98.29%</td>
-								<td>829BTC</td>
-								<td>89.34</td>
-							</tr>
-							<tr>
-								<th scope="row"><i class="icofont icofont-cur-renminbi-true"></i> Ripple</th>
-								<td>76.28$</td>
-								<td>89.45%</td>
-								<td>623BTC</td>
-								<td>89.44</td>
-							</tr>
+						
 						</tbody>
 					</table>
 				</div>
@@ -521,7 +520,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6 col-md-6 col-12 mb-lg-0 mb-md-4 mb-sm-4 mb-4">
-				<div class="row">
+				<div class="row py-0">
 					<div class="col-12 text-left">
 						<div class="section-title-2">
 							<h3>Frequently <span>questions</span></h3>
@@ -534,19 +533,19 @@
 				<ul class="accordion-box">
 					<li class="accordion block">
 						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How to buy & sell bitcoin?</div>
+							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>Okay, okay, I have U.S. dollars — how do I purchase cryptocurrency ? </div>
 						<div class="acc-content">
 							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
+								<p>There are a couple of methods, but the simplest and least expensive is via an online cryptocurrency exchange. You establish an account and from there, you transfer in cash and purchase any one of our accepted cryptocurrencies of your choice. available platforms to do that includes www.binance.com, www.coinbase.com, etc.</p>
 							</div>
 						</div>
 					</li>
 					<li class="accordion block">
 						<div class="acc-btn active">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How can i transfer bitcoin?</div>
+							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How about trading with {{site_name}} ltd.</div>
 						<div class="acc-content current">
 							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </p>
+								<p>Investing with us is very easy, just <a href="{% url 'register' %}">create an account</a>, <a href="{% url 'deposit' %}">fund </a>your {{site_name}} wallet with your desired amount with any of our accepted cryptocurrencies. You can then <a href="{% url 'plans' %}">choose a suitable plan</a>, and you are good to go.</p>
 							</div>
 						</div>
 					</li>
@@ -554,50 +553,29 @@
 					<!--Block-->
 					<li class="accordion block">
 						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>What about the trading with Bitfonix?</div>
+							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>What are the accepted cryptocurrencies i can fund my wallet with</div>
 						<div class="acc-content">
 							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
+								<p>Accepted cryptocurrencies on {{site_name}} for wallet funding include Bitcoin(BTC), Ethereum(ETH), Litecoin(LTC), Binance smart chain (BNB), US stable Token (USDT).</p>
 							</div>
 						</div>
 					</li>
 
-					<!--Block-->
 					<li class="accordion block">
 						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>what about the investment planing?</div>
+							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>What about Fund withdrawal</div>
 						<div class="acc-content">
 							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
+								<p>Withdrawing from your {{site_name}} is a breeze, you just have to <a>update your personal wallet address </a>, hit the <a href="{% url 'withdraw' %}">withdrawal button</a>, fill the details, submit and boom. in few minutes, your funds are made available in your destination wallet.</p>
 							</div>
 						</div>
 					</li>
 
-					<!--Block-->
-					<li class="accordion block">
-						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How can i get the price idea?</div>
-						<div class="acc-content">
-							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
-							</div>
-						</div>
-					</li>
-
-					<!--Block-->
-					<li class="accordion block">
-						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How can i contact with you?</div>
-						<div class="acc-content">
-							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
-							</div>
-						</div>
-					</li>
+					
 				</ul>
 				<!--End Accordion Box-->	
 			</div>
-			<!-- end col -->
+			<!-- end col ->
 			<div class="col-lg-6 col-md-6 col-12 mb-lg-0 mb-md-4 mb-sm-4 mb-4">
 				<div class="row d-sm-none d-xs-none d-block">
 					<div class="col-12 text-left">
@@ -608,73 +586,21 @@
 				</div>
 				<!-- end section title -->
 				
-				<!--Accordion Box-->
+				<!--Accordion Box->
 				<ul class="accordion-box">
 					<li class="accordion block">
 						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How to buy & sell bitcoin?</div>
+							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>What about Fund withdrawal</div>
 						<div class="acc-content">
 							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
+								<p>Withdrawing from your {{site_name}} is a breeze, you just have to <a>update your personal wallet address </a>, hit the <a href="{% url 'withdraw' %}">withdrawal button</a>, fill the details, submit and boom. in few minutes, your funds are made available in your destination wallet.</p>
 							</div>
 						</div>
 					</li>
-					<li class="accordion block">
-						<div class="acc-btn active">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How can i transfer bitcoin?</div>
-						<div class="acc-content current">
-							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco </p>
-							</div>
-						</div>
-					</li>
-
-					<!--Block-->
-					<li class="accordion block">
-						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>What about the trading with Bitfonix?</div>
-						<div class="acc-content">
-							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
-							</div>
-						</div>
-					</li>
-
-					<!--Block-->
-					<li class="accordion block">
-						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>what about the investment planing?</div>
-						<div class="acc-content">
-							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
-							</div>
-						</div>
-					</li>
-
-					<!--Block-->
-					<li class="accordion block">
-						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How can i get the price idea?</div>
-						<div class="acc-content">
-							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
-							</div>
-						</div>
-					</li>
-
-					<!--Block-->
-					<li class="accordion block">
-						<div class="acc-btn">
-							<div class="icon-outer"><span class="icon icofont icofont-ui-press"></span></div>How can i contact with you?</div>
-						<div class="acc-content">
-							<div class="content">
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco. </p>
-							</div>
-						</div>
-					</li>
+				
 				</ul>
-				<!--End Accordion Box-->	
-			</div>
+				<!--End Accordion Box->	
+			</div-->
 			<!-- end col -->				
 		</div>
 	</div>

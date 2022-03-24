@@ -6,7 +6,8 @@ def core(request) :
     host = request.get_host()
     #reg_link  = prepend + host + request.user.user_admin.reg_link
     ctx = {}
-    
+
+    ctx['liquidity'] = 53199180
     ctx['site_name_verbose'] = "Zealkoin"
     ctx['site_name'] = "Zealkoin"
     ctx['site_name_full'] = "Zealkoin ltd."
