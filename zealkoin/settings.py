@@ -163,11 +163,11 @@ EMAIL_PORT = "587"
 
 EMAIL_HOST_USER = "support@zealkoin.ltd"
 DEFAULT_FROM_EMAIL  = "support@zealkoin.ltd"
-EMAIL_HOST_PASSWORD = 'Zealkoin@password99.com'
+EMAIL_HOST_PASSWORD = '#@Kyletech99zealkoin'
 EMAIL_HOST_USER_ALERT = "transaction@zealkoin.ltd"
-EMAIL_HOST_USER_SUPPORT = "Zealkoin@password99.com"
 
-EMAIL_USE_TLS = True
+
+#EMAIL_USE_TLS = True
 
 SITE_NAME = "Zealkoin"
 SITE_ADDRESS = "https://www.zealkoin.ltd/"
