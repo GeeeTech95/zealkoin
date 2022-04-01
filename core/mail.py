@@ -217,7 +217,7 @@ class Email() :
             image = MIMEImage(f.read())
             email.attach(image)
             image.add_header('Content-ID',"<logo>") """        
-        self.auth_connecion.close()
+        
         email.send()
         
     
