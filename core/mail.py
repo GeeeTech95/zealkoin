@@ -162,10 +162,7 @@ class Email() :
         from django.core.mail import get_connection
         host = settings.EMAIL_HOST
         port = settings.EMAIL_PORT
-        if send_type == "support" :
-            password = "Kyletech99"
-        else :
-            password = "Kyletech99"    
+        password =    settings.EMAIL_HOST_PASSWORD  
         senders = {'alert' : settings.EMAIL_HOST_USER_ALERT,
         'support' : settings.EMAIL_HOST_USER_SUPPORT }
         self.send_from = senders.get(send_type,senders['alert'])
@@ -188,21 +185,25 @@ class Email() :
         headers = {
             'Content-Type' : 'text/plain'
         } 
-        try : 
-            email = EmailMessage(subject = subject,body=message,
-            from_email=self.send_from,to=receive_email_list,
-            headers = headers,connection=self.auth_connecion)
-            email.send()
-            self.auth_connecion.close()
-        except :
-            pass
-
+        
+        email = EmailMessage(subject = subject,body=message,
+        from_email=self.send_from,to=receive_email_list,
+        headers = headers,connection=self.auth_connecion)
+        email.send()
+        self.auth_connecion.close()
+      
 
     def send_html_email(self,receive_email_list,template = None,subject =None,files_path_list=None,ctx=None) :
         subject = subject or self.default_subject
         template = template or self.default_template
         msg = render_to_string(template,ctx)
-        email = EmailMessage(subject,msg,self.send_from,receive_email_list,connection=self.auth_connecion)
+        email = EmailMessage(
+            subject,
+            msg,
+            self.send_from,
+            receive_email_list,
+            connection=self.auth_connecion
+            )
         email.content_subtype = "html"
         #email.mixed_subtype = 'related'
         BASE_DIR = settings.STATIC_URL
@@ -216,11 +217,10 @@ class Email() :
             image = MIMEImage(f.read())
             email.attach(image)
             image.add_header('Content-ID',"<logo>") """        
-        try : 
-            email.send()
-            self.auth_connecion.close()
-        except :
-            pass    
+        self.auth_connecion.close()
+        email.send()
+        
+    
         
 
 

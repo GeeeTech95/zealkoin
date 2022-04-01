@@ -160,15 +160,16 @@ STATIC_URL = '/static/'
 EMAIL_HOST  = "smtp.zoho.com"
 EMAIL_PORT = "587"
 #for other emails 
-EMAIL_HOST_USER = "aguikenna@fiberswift.com"
-DEFAULT_FROM_EMAIL  = "aguikenna@fiberswift.com"
-EMAIL_HOST_PASSWORD = '#@Kyletech99g-klazik'
-EMAIL_HOST_USER_ALERT = "aguikenna@fiberswift.com"
-EMAIL_HOST_USER_SUPPORT = "aguikenna@fiberswift.com"
 
-#EMAIL_USE_TLS = "True"
+EMAIL_HOST_USER = "support@zealkoin.ltd"
+DEFAULT_FROM_EMAIL  = "support@zealkoin.ltd"
+EMAIL_HOST_PASSWORD = 'Zealkoin@password99.com'
+EMAIL_HOST_USER_ALERT = "transaction@zealkoin.ltd"
+EMAIL_HOST_USER_SUPPORT = "Zealkoin@password99.com"
 
-SITE_NAME = "Loci Trade"
+EMAIL_USE_TLS = True
+
+SITE_NAME = "Zealkoin"
 SITE_ADDRESS = "https://www.zealkoin.ltd/"
 
 FREE_PLAN_DURATION = 2  #in days
