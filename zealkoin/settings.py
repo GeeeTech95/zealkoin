@@ -161,7 +161,7 @@ EMAIL_HOST  = "smtp.zoho.com"
 EMAIL_PORT = "587"
 #for other emails 
 
-EMAIL_HOST_USER = "support@zealkoin.ltd"
+EMAIL_HOST_USER_SUPPORT = "support@zealkoin.ltd"
 DEFAULT_FROM_EMAIL  = "support@zealkoin.ltd"
 EMAIL_HOST_PASSWORD = '#@Kyletech99zealkoin'
 EMAIL_HOST_USER_ALERT = "transaction@zealkoin.ltd"
