@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 import email
+from email.mime.image import MIMEImage
 from django.shortcuts import render
 from django.views.generic import RedirectView,View
 from django.http import JsonResponse
@@ -197,7 +198,8 @@ class Email() :
         subject = subject or self.default_subject
         template = template or self.default_template
         msg = render_to_string(template,ctx)
-        email = EmailMessage(
+        
+        email = EmailMultiAlternatives(
             subject,
             msg,
             self.send_from,
@@ -205,9 +207,15 @@ class Email() :
             connection=self.auth_connecion
             )
         email.content_subtype = "html"
+        email.mixed_subtype = "related"
         #email.mixed_subtype = 'related'
         BASE_DIR = settings.STATIC_URL
-        logo_path = os.path.join(BASE_DIR,"user-dashboard/images/logo/logo.png")
+        logo_path = os.path.join(BASE_DIR,"/main-theme/img/logo.png")
+        with open(logo_path,'rb') as f :
+            logo = MIMEImage(f.read(), _subtype="png+xml")
+            logo.add_header("Content-ID","logo")
+            email.attach(logo)
+            
         """if isinstance(files_path_list,list) :
             for file in files_path_list :
                 "fetch image"
