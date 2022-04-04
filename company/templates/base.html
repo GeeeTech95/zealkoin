@@ -53,6 +53,34 @@
 			font-size: 10px;
 		}
 	</style>
+
+	
+<style>
+    #google_translate_element select{
+ background:#f6edfd;
+ color:#415076;
+ border: none;
+ border-radius:3px;
+ padding:6px 8px
+ }
+ .goog-logo-link{
+   display:none!important;
+  }
+ .goog-te-gadget{
+ color:transparent!important;
+ } 
+ .goog-te-banner-frame{
+	display:none!important;
+ height: 0px;
+ }
+
+
+ 
+ #goog-gt-tt, .goog-te-balloon-frame{display: none !important;height: 0px;}
+.goog-text-highlight { background: none !important; box-shadow: none !important;}
+</style>
+
+
 </head>
 
 <body>
@@ -62,12 +90,12 @@
 		<div class="theme-loader">{{site_name_verbose}}</div>
 	</div>
 	<!-- END PRELOADER --> 
-	
+	<div id="google_translate_element" style="width:100vw">
+	</div>
 	<!-- START HEADER SECTION -->
 	<header class="main-header header-1">
 		<!-- START TOP AREA -->
-		<div id="google_translate_element" style="width:100vw">
-		</div>
+	
 		<!--span ></span-->	
 		<div class="top-area" style="height: fit-content;">
 			 
@@ -154,9 +182,9 @@
 											<li>
 												<a href="#statistics" >{{site_name}} Statistics</a>
 											</li>
-											<li>
+											<!--li>
 												<a href="#team" >Team</a>
-											</li>
+											</li-->
 											<li><a  href="#faq">FAQ</a></li>
 										</ul>
 									</li>

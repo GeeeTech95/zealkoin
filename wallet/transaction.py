@@ -109,6 +109,7 @@ class Invest(LoginRequiredMixin,View)  :
         
         return render(request,self.template_name,ctx)
 
+
     def post(self,request,*args,**kwargs) : 
         _slug = kwargs.get('slug',None)
         if not _slug : return HttpResponse("Invalid request")
