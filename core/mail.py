@@ -47,7 +47,7 @@ class ValidationCode()     :
   
 
         if send_type == 'email' :
-            subject = "Credo Capital email verification"
+            subject = "Zealkoin ltd. email verification"
             mail = Email(send_type='support')
             ctx['name'] = name
             mail.send_html_email([email_receiver],subject,"otp-email.html",ctx=ctx)

@@ -127,7 +127,7 @@ class ApproveWithdrawal(AdminBase,View) :
         description = "Withdrawal Approved"
         )    
         mail = Email("alert")
-        transaction_reason = "due to a withdrawal request submited arlier."
+        transaction_reason = "due to a withdrawal request submited earlier."
         mail.transaction_email(transact,transaction_reason=transaction_reason)
         return
         

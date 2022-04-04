@@ -41,7 +41,9 @@
                     </div><!-- .site-logo -->
                     
                     <div class="dropdown topbar-action-item topbar-action-user">
+                        {% if user.get_picture %}
                         <a href="#" data-toggle="dropdown"> <img class="icon" src="{{user.get_picture}}" alt="thumb"> </a>
+                        {% endif %}
                         <div class="dropdown-menu dropdown-menu-right">
                             <div class="user-dropdown">
                                 <div class="user-dropdown-head">
@@ -74,17 +76,19 @@
                     <ul class="topbar-action-list">
 
 
-                        <li class="dropdown topbar-action-item topbar-action-language">
+                        <!--li class="dropdown topbar-action-item topbar-action-language">
                             <a href="#" data-toggle="dropdown"> EN <em class="ti ti-angle-down"></em> </a>
-                            <ul class="dropdown-menu">
+                            <!--ul class="dropdown-menu">
                                 <li><a href="#">FR</a></li>
                                 <li><a href="#">JY</a></li>
                                 <li><a href="#">CH</a></li>
-                            </ul>
+                            </ul->
                         </li><!-- .topbar-action-item -->
 
                         <li class="dropdown topbar-action-item topbar-action-user">
+                            {% if user.get_picture %}
                             <a href="#" data-toggle="dropdown"> <img class="icon" src="{{user.get_picture}}" alt="thumb"> </a>
+                            {% endif %}
                             <div class="dropdown-menu dropdown-menu-right">
                                 <div class="user-dropdown">
                                     <div class="user-dropdown-head">
@@ -113,13 +117,15 @@
                     <div class="user-sidebar-overlay"></div>
                     <div class="user-box d-none d-lg-block">
                         <div class="user-image">
+                            {% if user.get_picture %}
                             <img style="border-radius: 50%;height: 80px;width:80px;" src="{{user.get_picture}}" alt="thumb">
+                            {% endif %}
                         </div>
                         <h6 class="user-name">{{user.name}}</h6>
                         <div class="user-uid">Unique ID: <span>{{user.unique_id}}</span></div>
                         <ul class="btn-grp guttar-10px">
                             {% if not user.email_verified %}
-                            <li><a href="#" class="btn btn-xs btn-warning">Verify Email</a></li>
+                            <!--li><a href="#" class="btn btn-xs btn-warning">Verify Email</a></li-->
                             {% endif %}
                             <!--li><a href="kyc.html" class="btn btn-xs btn-warning">KYC Pending</a></li-->
                         </ul>
@@ -146,7 +152,7 @@
                     <div class="d-lg-none">
                         <div class="user-sidebar-sap"></div>
                         <div class="gaps-1x"></div>
-                        <ul class="topbar-action-list">
+                        <!--ul class="topbar-action-list">
                          
                             <li class="dropup topbar-action-item topbar-action-language">
                                 <a href="#" data-toggle="dropdown" aria-haspopup="true"> EN <em class="ti ti-angle-up"></em> </a>
@@ -155,7 +161,7 @@
                                     <li><a href="#">JY</a></li>
                                     <li><a href="#">CH</a></li>
                                 </ul>
-                            </li><!-- .topbar-action-item -->
+                            </li><!-- .topbar-action-item ->
                         </ul><!-- .topbar-action-list -->
                     </div>
                 </div><!-- .user-sidebar -->
