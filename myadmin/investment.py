@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import UserPassesTestMixin,LoginRequiredMixin
 from django.shortcuts import render 
 from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
 from django.utils import timezone
+from django.conf import settings
 
 from core.mail import Email
 from wallet.models import Investment, Plan,Transaction,PendingDeposit,WithdrawalApplication
@@ -68,8 +69,38 @@ class ApproveDeposit(AdminBase,View) :
         description = "Deposit Approved"
         )    
         mail = Email("alert")
-        transaction_reason = "due to a deposit you have made earlier."
-        mail.transaction_email(transact,transaction_reason=transaction_reason)
+        ctx = {
+                'name' : instance.user.name,
+                'text' : """
+                <p>This is to inform you that your deposit of ${0} has been approved, and your {1} wallet has been credited.
+                </p>
+                <p>Find below the details  the transaction:</p>
+                <strong>Amount : ${0}</strong><br>
+                <strong>Payment Mode : {2}</strong><br>
+                <strong>User : {3}</strong><br>
+    
+                <strong>Transaction Batch : {4}</strong><br>
+                <p>Thanks For Choosing Zealkoin.ltd</p>
+                <p></p><br>
+                <a href="zealkoin.ltd">zealkoin.ltd</a><br>
+                <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
+                <em>All Rights Reserved</em>
+                """.format(
+                instance.amount,
+                settings.SITE_NAME,
+                instance.payment_method,
+                instance.user.username,
+                str(uuid.uuid1()).replace("-","") +  str(uuid.uuid1()).replace("-","")
+                #"usdguyfusfsdhsdusdusudyuysd"
+
+             )
+        }
+        mail.send_html_email(
+            [instance.user.email],
+            subject = "Credit Transaction alert",
+            ctx = ctx
+        )
+        
         return
         
 
@@ -159,7 +190,7 @@ class ApproveWithdrawal(AdminBase,View) :
         
         mail.send_html_email(
             [instance.user.email],
-            subject = "Transaction alert",
+            subject = "Debit Transaction alert",
             ctx = ctx
         )
         return

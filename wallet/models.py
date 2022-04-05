@@ -222,7 +222,7 @@ class Wallet(models.Model) :
 
     @property
     def available_balance(self) :
-        return  round(self.initial_balance + self.funded_earning - - self.get_pending_withdrawal_debits,2)
+        return  round(self.initial_balance + self.funded_earning -  self.get_pending_withdrawal_debits,2)
                             
 
     
