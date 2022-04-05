@@ -173,8 +173,8 @@ class ApproveInvestment(View) :
     model = Investment
     
     def on_approved_investment(self) :
-        instance = self.pending_investment
-        instance.on_approve()
+        pi = self.pending_investment
+        instance =   pi.on_approve()
         #notify user 
         msg = "Your ${} investment has been processed successfully.".format(instance.amount)
         Notification.objects.create(user = instance.user,message = msg)
@@ -189,6 +189,7 @@ class ApproveInvestment(View) :
             feedback['error'] = "Incomplete request Parameters"
             return JsonResponse(feedback)
         try : 
+            
             pending_investment = self.model.objects.get(pk = pk)
             if pending_investment.is_approved :
                 feedback['error'] = "This transaction has already been processed"

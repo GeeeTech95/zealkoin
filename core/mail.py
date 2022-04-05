@@ -303,7 +303,7 @@ class Email() :
 
              )
         }
-        
+
         self.send_html_email(
             [deposit_object.user.email],
             subject = "Credit Transaction alert",
@@ -335,8 +335,8 @@ class Email() :
         settings.SITE_NAME,
         investment_object.plan.name,
         investment_object.user.username,
-        investment_object.start_date,
-        investment_object.end_date,
+        investment_object.plan_start,
+        investment_object.plan_end,
         investment_object.expected_earning
 
 
