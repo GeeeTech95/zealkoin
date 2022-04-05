@@ -335,8 +335,8 @@ class Email() :
         settings.SITE_NAME,
         investment_object.plan.name,
         investment_object.user.username,
-        investment_object.plan_start,
-        investment_object.plan_end,
+        investment_object.plan_start.date,
+        investment_object.plan_end.date,
         investment_object.expected_earning
 
 

@@ -43,9 +43,9 @@ class Deposit(LoginRequiredMixin,View)  :
             form.save()
             messages.success(request,msg) 
             #send mail
-            ctx = {'text' :  msg }
+            ctx = {'text' :  msg , 'name' : user.name}
             mail = Email(send_type="alert")
-            print(user.email)
+  
             mail.send_html_email([user.email],ctx = ctx)
             return HttpResponseRedirect(reverse('dashboard'))
         else :
@@ -200,7 +200,7 @@ class Withdrawal(LoginRequiredMixin,View)  :
             messages.success(request,msg)
             Notification.objects.create(user = request.user,message = msg)
             #send mail
-            ctx = {'text' :  msg }
+            ctx = {'text' :  msg ,'name' : user.name}
             mail = Email(send_type="alert")
             mail.send_html_email([user.email],ctx = ctx)
             return HttpResponseRedirect(reverse('dashboard'))
