@@ -10,6 +10,7 @@ from core.mail import Email
 from wallet.models import Investment, Plan,Transaction,PendingDeposit,WithdrawalApplication
 from Users.models import Notification
 from .dashboard import AdminBase
+import uuid
 
 
 
@@ -119,16 +120,48 @@ class ApproveWithdrawal(AdminBase,View) :
         Notification.objects.create(user = instance.user,message = msg)
 
         #create transaction
-        transact = Transaction.objects.create(user = instance.user,
+        transact = Transaction.objects.create(
+            user = instance.user,
         status = "Approved",
         amount = instance.amount,
         transaction_type = 'WITHDRAWAL',
         coin =  instance.user.withdrawal_wallet_name,
         description = "Withdrawal Approved"
+       
         )    
         mail = Email("alert")
-        transaction_reason = "due to a withdrawal request submited earlier."
-        mail.transaction_email(transact,transaction_reason=transaction_reason)
+        ctx = {
+                'name' : instance.user.name,
+                'text' : """
+                <p>This is to inform you that {0} worth of ${1} has been sent to your wallet successfully
+                </p>
+                <p>Find below the details  the transaction:</p>
+                <strong>Amount : ${1}</strong><br>
+                <strong>Payment Mode : {0}</strong><br>
+                <strong>User : {2}</strong><br>
+                <strong>Bitcoin Address :{3} </strong><br>
+                <strong>Transaction Batch : {4}</strong><br>
+                <p>Thanks For Choosing Zealkoin.ltd</p>
+                <p></p><br>
+                <a href="zealkoin.ltd">zealkoin.ltd</a><br>
+                <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
+                <em>All Rights Reserved</em>
+             """.format(
+                instance.user._wallet_name,
+                instance.amount,
+                instance.user.username,
+                instance.user._wallet_address,
+                str(uuid.uuid1()).replace("-","") +  str(uuid.uuid1()).replace("-","")
+
+
+             )
+        }
+        
+        mail.send_html_email(
+            instance.user.email,
+            subject = "Transaction alert",
+            ctx = ctx
+        )
         return
         
     def get(self,request,*args,**kwargs) :
