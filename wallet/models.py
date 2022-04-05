@@ -218,11 +218,11 @@ class Wallet(models.Model) :
     
     @property
     def current_balance(self) :
-        return  round(self.initial_balance + self.get_active_investment_balance + self.funded_earning - self.get_pending_withdrawal_debits,2)
+        return  round(self.initial_balance + self.funded_earning + self.get_active_investment_balance - self.get_pending_withdrawal_debits,2)
 
     @property
     def available_balance(self) :
-        return  round(self.initial_balance + self.funded_earning - self.withdrawals,2)
+        return  round(self.initial_balance + self.funded_earning - - self.get_pending_withdrawal_debits,2)
                             
 
     
