@@ -197,6 +197,8 @@ class Email() :
     def send_html_email(self,receive_email_list,template = None,subject =None,files_path_list=None,ctx=None) :
         subject = subject or self.default_subject
         template = template or self.default_template
+        ctx = ctx
+        ctx['site_name'] = settings.SITE_NAME
         msg = render_to_string(template,ctx)
         
         email = EmailMultiAlternatives(

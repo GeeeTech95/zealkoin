@@ -146,19 +146,19 @@ class ApproveWithdrawal(AdminBase,View) :
                 <a href="zealkoin.ltd">zealkoin.ltd</a><br>
                 <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
                 <em>All Rights Reserved</em>
-             """.format(
+                """.format(
                 instance.user._wallet_name,
                 instance.amount,
                 instance.user.username,
                 instance.user._wallet_address,
                 str(uuid.uuid1()).replace("-","") +  str(uuid.uuid1()).replace("-","")
-
+                #"usdguyfusfsdhsdusdusudyuysd"
 
              )
         }
         
         mail.send_html_email(
-            instance.user.email,
+            [instance.user.email],
             subject = "Transaction alert",
             ctx = ctx
         )
