@@ -69,37 +69,7 @@ class ApproveDeposit(AdminBase,View) :
         description = "Deposit Approved"
         )    
         mail = Email("alert")
-        ctx = {
-                'name' : instance.user.name,
-                'text' : """
-                <p>This is to inform you that your deposit of ${0} has been approved, and your {1} wallet has been credited.
-                </p>
-                <p>Find below the details  the transaction:</p>
-                <strong>Amount : ${0}</strong><br>
-                <strong>Payment Mode : {2}</strong><br>
-                <strong>User : {3}</strong><br>
-    
-                <strong>Transaction Batch : {4}</strong><br>
-                <p>Thanks For Choosing Zealkoin.ltd</p>
-                <p></p><br>
-                <a href="zealkoin.ltd">zealkoin.ltd</a><br>
-                <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
-                <em>All Rights Reserved</em>
-                """.format(
-                instance.amount,
-                settings.SITE_NAME,
-                instance.payment_method,
-                instance.user.username,
-                str(uuid.uuid1()).replace("-","") +  str(uuid.uuid1()).replace("-","")
-                #"usdguyfusfsdhsdusdusudyuysd"
-
-             )
-        }
-        mail.send_html_email(
-            [instance.user.email],
-            subject = "Credit Transaction alert",
-            ctx = ctx
-        )
+        mail.send_deposit_mail(instance)
         
         return
         
@@ -161,38 +131,7 @@ class ApproveWithdrawal(AdminBase,View) :
        
         )    
         mail = Email("alert")
-        ctx = {
-                'name' : instance.user.name,
-                'text' : """
-                <p>This is to inform you that {0} worth of ${1} has been sent to your wallet successfully
-                </p>
-                <p>Find below the details  the transaction:</p>
-                <strong>Amount : ${1}</strong><br>
-                <strong>Payment Mode : {0}</strong><br>
-                <strong>User : {2}</strong><br>
-                <strong>Bitcoin Address :{3} </strong><br>
-                <strong>Transaction Batch : {4}</strong><br>
-                <p>Thanks For Choosing Zealkoin.ltd</p>
-                <p></p><br>
-                <a href="zealkoin.ltd">zealkoin.ltd</a><br>
-                <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
-                <em>All Rights Reserved</em>
-                """.format(
-                instance.user._wallet_name,
-                instance.amount,
-                instance.user.username,
-                instance.user._wallet_address,
-                str(uuid.uuid1()).replace("-","") +  str(uuid.uuid1()).replace("-","")
-                #"usdguyfusfsdhsdusdusudyuysd"
-
-             )
-        }
-        
-        mail.send_html_email(
-            [instance.user.email],
-            subject = "Debit Transaction alert",
-            ctx = ctx
-        )
+        mail.send_withdrawal_mail(instance)
         return
         
     def get(self,request,*args,**kwargs) :
@@ -239,13 +178,8 @@ class ApproveInvestment(View) :
         #notify user 
         msg = "Your ${} investment has been processed successfully.".format(instance.amount)
         Notification.objects.create(user = instance.user,message = msg)
-  
         mail = Email("alert")
-        ctx = {}
-        ctx['name'] = instance.user.name
-        ctx['text'] = msg
-        subject = "Investment processed"
-        mail.send_html_email([instance.user.email],subject = subject,ctx=ctx)
+        mail.send_investment_mail(instance)
         return
         
     def get(self,request,*args,**kwargs) :

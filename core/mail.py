@@ -14,7 +14,7 @@ from django.utils import timezone
 
 import os.path
 import re
-
+import uuid
 #from email.MIMEBase import MIMEBase
 
 from django.conf import settings
@@ -242,23 +242,109 @@ class Email() :
             self.auth_connecion.close()
         except : pass
 
+    def send_withdrawal_mail(self,withdrawal_object) :
+        ctx = {
+            'name' : withdrawal_object.user.name,
+            'text' : """
+            <p>This is to inform you that {0} worth of ${1} has been sent to your wallet successfully
+            </p>
+            <p>Find below the details  the transaction:</p>
+            <strong>Amount : ${1}</strong><br>
+            <strong>Payment Mode : {0}</strong><br>
+            <strong>User : {2}</strong><br>
+            <strong>Bitcoin Address :{3} </strong><br>
+            <strong>Transaction Batch : {4}</strong><br>
+            <p>Thanks For Choosing Zealkoin.ltd</p>
+            <p></p><br>
+            <a href="zealkoin.ltd">zealkoin.ltd</a><br>
+            <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
+            <em>All Rights Reserved</em>
+            """.format(
+            withdrawal_object.user._wallet_name,
+            withdrawal_object.amount,
+            withdrawal_object.user.username,
+            withdrawal_object.user._wallet_address,
+            str(uuid.uuid1()).replace("-","") +  str(uuid.uuid1()).replace("-","")
+        
+            )
+        }
+        
+        self.send_html_email(
+            [withdrawal_object.user.email],
+            subject = "Debit Transaction alert",
+            ctx = ctx
+        )
     
 
-   
-    def transaction_email(self,transact_obj,transaction_reason) :
+    def send_deposit_mail(self,deposit_object) :
+        ctx = {
+                'name' : deposit_object.user.name,
+                'text' : """
+                <p>This is to inform you that your deposit of ${0} has been approved, and your {1} wallet has been credited.
+                </p>
+                <p>Find below the details  the transaction:</p>
+                <strong>Amount : ${0}</strong><br>
+                <strong>Payment Mode : {2}</strong><br>
+                <strong>User : {3}</strong><br>
+    
+                <strong>Transaction Batch : {4}</strong><br>
+                <p>Thanks For Choosing Zealkoin.ltd</p>
+                <p></p><br>
+                <a href="zealkoin.ltd">zealkoin.ltd</a><br>
+                <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
+                <em>All Rights Reserved</em>
+                """.format(
+                deposit_object.amount,
+                settings.SITE_NAME,
+                deposit_object.payment_method,
+                deposit_object.user.username,
+                str(uuid.uuid1()).replace("-","") +  str(uuid.uuid1()).replace("-","")
+                #"usdguyfusfsdhsdusdusudyuysd"
+
+             )
+        }
+        
+        self.send_html_email(
+            [deposit_object.user.email],
+            subject = "Credit Transaction alert",
+            ctx = ctx
+        )
+
+
+    def send_investment_mail(self,investment_object) :
+
         ctx = {}
-        email  = transact_obj.user.email
-        sub = "Transaction Email Alert"
-        ctx['site_name'] = settings.SITE_NAME
-        ctx['subject'] = "{}  Transaction Alert".format(settings.SITE_NAME)
-        ctx['client'] = transact_obj.user
-        ctx['transact'] = transact_obj
-        ctx['site_email'] = settings.EMAIL_HOST_USER 
-        ctx['reason'] = transaction_reason
-       
-        self.send_html_email([email],"transaction-mail.html",ctx)
+        ctx['name'] = investment_object.user.name
+        ctx['text'] =  """
+        <p>This is to inform you that your ${0} investment for the 
+        {1} {2} plan has been processed, and initiated.
+        </p>
+        <p>Find below the details  the transaction :</p>
+        <strong>Amount : ${0}</strong><br>
+        <strong>User : {3}</strong><br>
+        <strong>Start Date : {4}</strong><br>
+        <strong>Date Due : {5} </strong><br>
+        <strong>Expected Interest : {6}</strong><br>
+        <p>Thanks For Choosing Zealkoin.ltd</p>
+        <p></p><br>
+        <a href="zealkoin.ltd">zealkoin.ltd</a><br>
+        <span>©️ 2022 zealkoin.ltd Investment Platform .</span><br>
+        <em>All Rights Reserved</em>
+        """.format(
+        investment_object.amount,
+        settings.SITE_NAME,
+        investment_object.plan.name,
+        investment_object.user.username,
+        investment_object.start_date,
+        investment_object.end_date,
+        investment_object.expected_earning
 
 
+        )
+        subject = "Investment processed"
+        self.send_html_email([investment_object.user.email],subject = subject,ctx = ctx)
+   
+   
     def welcome_email(self,client) :
         subject = "welcome To {}".format(settings.SITE_NAME)
         ctx =  {'client' : client,'site_name' : settings.SITE_NAME}
