@@ -49,6 +49,9 @@ class MemberDetail(AdminBase,View)  :
             "allow_automatic_investment" : _user.user_wallet.allow_automatic_investment
         }
         form = self.form_class(initial=initial)
+        try : active_investments = _user.investment.filter(is_active = True)
+        except : active_investments = None
+        member = _user
         return render(request,self.template_name,locals())
 
 

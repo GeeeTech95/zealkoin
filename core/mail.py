@@ -190,7 +190,9 @@ class Email() :
         email = EmailMessage(subject = subject,body=message,
         from_email=self.send_from,to=receive_email_list,
         headers = headers,connection=self.auth_connecion)
-        email.send()
+        try :
+            email.send()
+        except : pass    
         self.auth_connecion.close()
       
 

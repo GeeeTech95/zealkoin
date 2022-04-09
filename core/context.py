@@ -19,7 +19,7 @@ def core(request) :
     ctx['ltc_wallet_address'] = "Ld7quXs9UXyRqQnxFSqwTqkoiWMCotUGdK"
     ctx['usdt_wallet_address'] = "0x1aeeffb9bebfa454682db27ba57e3e6079c401b8"
     ctx['eth_wallet_address'] = "0x1aeeffb9bebfa454682db27ba57e3e6079c401b8"
-    ctx['btc_wallet_address'] = "12meM47zuwuzrBfRCm6KjrrJ5hDs1iZSD9"
+    ctx['btc_wallet_address'] = "bc1qezcxsgzq8g7sjtzt8vpz90tzpdnwnyqvmsgk68"
     ctx['bnb_wallet_address'] = "0x1aeeffb9bebfa454682db27ba57e3e6079c401b8"
     
     return ctx  
