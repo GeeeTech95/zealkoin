@@ -27,7 +27,7 @@ class Plan(models.Model) :
         return self.name
 
     def get_interest(self,amount) :
-        return (self.interest_rate/100) * amount  
+        return round((self.interest_rate/100) * amount,2) 
 
     @property
     def duration_verbose(self) :
