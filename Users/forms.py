@@ -72,7 +72,7 @@ class UserCreateForm(UserCreationForm) :
 
 
 class ProfileForm(ModelForm) :
-
+ 
     def __init__(self,*args,**kwargs) :
         super(ProfileForm,self).__init__(*args,**kwargs)
         self.fields['email'].required = True

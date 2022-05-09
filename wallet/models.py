@@ -121,6 +121,17 @@ class Investment(models.Model) :
                 return True
         return False 
 
+    @property 
+    def total_earning(self) :
+        """ returns the total earning a user has amassed"""
+        earnings =  self.user.investment.filter(
+            is_active = False
+        ).aggregate(
+            Sum("expected_earning")
+        ) or 0.00
+        
+        return earnings
+
 
     @property
     def current_earning(self) :
@@ -161,7 +172,7 @@ class Investment(models.Model) :
         #deactivate plan
         self.is_active = False
         #move to wallet
-        self.user.user_wallet.credit(self.amount)
+        self.user.user_wallet.credit(self.amount + self.expected_earning)
         self.user.user_wallet.save()
         self.save()
     
