@@ -45,7 +45,7 @@ class User(AbstractUser) :
     
     #payment wallet
     _wallet_name = models.CharField(max_length=10,null  = True,choices = wallet_choices)
-    _wallet_address = models.CharField(max_length=40,null  = True,help_text = "BEP20 address")
+    _wallet_address = models.CharField(max_length=100,null  = True,help_text = "BEP20 address")
     
     email_verified = models.BooleanField(default= False)
 
