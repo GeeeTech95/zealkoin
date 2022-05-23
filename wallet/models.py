@@ -27,7 +27,7 @@ class Plan(models.Model) :
         return self.name
 
     def get_interest(self,amount) :
-        return round((self.interest_rate/100) * amount,2) 
+        return (self.interest_rate/100) * amount  
 
     @property
     def duration_verbose(self) :
@@ -93,8 +93,8 @@ class Investment(models.Model) :
     def save(self,*args,**kwargs) :
         if not self.pk : 
             self.expected_earning = self.plan.get_interest(self.amount)
-
-             #check if admnin wants to be approving investmets
+             
+             #check if admnin wants to be approving investmets generally or individually
             if  not self.approve_investments() :
                 #check if individual
                 if self.user_wallet.allow_automatic_investment   :
@@ -103,7 +103,6 @@ class Investment(models.Model) :
             else : 
                 #dont start the plan, start on approval
                 pass
-
             #deduct from balance for the plan
             self.user.user_wallet.debit(self.amount)
         
@@ -124,17 +123,6 @@ class Investment(models.Model) :
         if timezone.now()  >=  self.plan_end :
                 return True
         return False 
-
-    @property 
-    def total_earning(self) :
-        """ returns the total earning a user has amassed"""
-        earnings =  self.user.investment.filter(
-            is_active = False
-        ).aggregate(
-            Sum("expected_earning")
-        ) or 0.00
-
-        return earnings
 
 
     @property
@@ -202,8 +190,16 @@ class Wallet(models.Model) :
     withdrawal_allowed = models.BooleanField(default=False)
     allow_automatic_investment = models.BooleanField(default=True)
 
-    def debit(self,amount) :
-        self.initial_balance -= amount
+    def debit(self,amount,bal_type = "initial") :
+        """ bal type signifies the balance to credit
+        defaults to intial balance
+        """
+        if bal_type == "initial" :
+            self.initial_balance -= amount
+
+        elif bal_type == "referral" :
+            self.referral_earning -= amount
+
         #send mail
         self.save()
 
@@ -211,14 +207,24 @@ class Wallet(models.Model) :
         self.initial_balance += amount
         #send mail
         self.save()
-    
+
+    @property
+    def total_past_earning(self) :
+        query = self.user.investment.filter(is_active = False)
+        accumulated  = query.aggregate(
+            expected_earning = Sum("expected_earning")
+        )['expected_earning'] or 0
+
+        return accumulated
+
+
     @property
     def get_active_investment_balance(self) :
         query = self.user.investment.filter(is_active = True)
         capitals  = query.aggregate(
             investment_bal = Sum("amount")
         )['investment_bal'] or 0
-        current_interests = 0
+        current_interests  = 0
         for inv in query :
             current_interests += inv.current_earning 
         return capitals + current_interests
@@ -226,18 +232,20 @@ class Wallet(models.Model) :
     @property
     def get_pending_withdrawal_debits(self) :
         return self.user.pending_withdrawal.filter(
-            status = "PENDING"
+            status = "PENDING",
+            balance_type = "Main",
+            
         ).aggregate(
             total_pending_debits = Sum("amount")
         )['total_pending_debits'] or 0.00
     
     @property
     def current_balance(self) :
-        return  round(self.initial_balance + self.get_active_investment_balance + self.funded_earning - self.withdrawals - self.get_pending_withdrawal_debits,2)
+        return  round(self.initial_balance + self.get_active_investment_balance + self.funded_earning - self.withdrawals ,2)
 
     @property
     def available_balance(self) :
-        return  round(self.initial_balance + self.funded_earning - self.withdrawals - self.get_pending_withdrawal_debits,2)
+        return  round(self.initial_balance + self.funded_earning  - self.withdrawals - self.get_pending_withdrawal_debits,2)
                             
 
     
@@ -325,11 +333,11 @@ class PendingDeposit(models.Model)    :
 
 class WithdrawalApplication(models.Model) :
     balance_type_choices = (('Referral','Referral'),('Main','Main'))
-    status = (('PENDING','PENDING'),('APPROVED','APPROVED'),('DECLINED','DECLINED'))
+    status_choices = (('PENDING','PENDING'),('APPROVED','APPROVED'),('DECLINED','DECLINED'))
     user  = models.ForeignKey(get_user_model(),on_delete = models.CASCADE,related_name = 'pending_withdrawal')
     amount = models.FloatField()  #in $
     balance_type = models.CharField(max_length=10,choices = balance_type_choices)
-    status = models.CharField(max_length= 20,choices = status,default = 'PENDING')
+    status = models.CharField(max_length= 20,choices = status_choices,default = 'PENDING')
     amount_paid = models.FloatField(blank = True,null = True)  
     is_received = models.BooleanField(default = True)
     date = models.DateTimeField(auto_now_add=True)
@@ -344,7 +352,12 @@ class WithdrawalApplication(models.Model) :
     
     def on_approve(self) :
         self.status = "APPROVED"
-        self.user.user_wallet.debit(self.amount)
+        
+        if self.balance_type == "Referral" :
+            self.user.user_wallet.debit(self.amount,bal_type = "referral")
+        else :
+            self.user.user_wallet.debit(self.amount)
+
         self.save()
  
  

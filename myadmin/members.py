@@ -40,7 +40,7 @@ class MemberDetail(AdminBase,View)  :
         if not _pk : return HttpResponse("invalid request")
         try : _user = self.model.objects.get(pk = _pk)
         except : return HttpResponse("User does not exist")
-        total_earning = _user.user_wallet.current_balance
+        total_earning = _user.user_wallet.total_past_earning
         initial = {
             "balance" : _user.user_wallet.initial_balance,
             "name" : _user.name,

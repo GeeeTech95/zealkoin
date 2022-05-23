@@ -22,7 +22,7 @@
                                   {% endif %}
                                     <div class="clearfix"></div><br>
                                         <div class="author-box-name text-left">
-                                           useranme : {{member.name}}<br>
+                                           useranme : {{member.username}}<br>
                                            email : {{member.email}}<br>
                                            country : {{member.country.name}}<br>
                                            Phone number : {{member.phone_number}}
@@ -74,7 +74,7 @@
                                 <div class="text-center">
                                     <div class="author-box-description">
                                         <p>
-                                           <b>Current Total Earning : ${{total_earning|intcomma}}</b> <br>
+                                           <b>Current Total Earning : ${{member.user_wallet.total_past_earning|intcomma}}</b> <br>
                                            <b>Total balance : ${{member.user_wallet.current_balance|intcomma}}</b> <br>
                                            <b>Available balance : ${{member.user_wallet.available_balance|intcomma}}</b> 
                                         </p>
