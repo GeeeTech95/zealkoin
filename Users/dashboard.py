@@ -13,6 +13,8 @@ from django.db.models import Sum
 class Dashboard(LoginRequiredMixin,TemplateView) :
     template_name = 'dashboard.html'
 
+ 
+
     def get_context_data(self,*args,**kwargs) :
         ctx = super(Dashboard,self).get_context_data(*args,**kwargs)  
         try : ctx['pending_deposit'] = self.request.user.user_pending_deposit.all().aggregate(

@@ -289,7 +289,7 @@ class Email() :
                 <strong>Payment Mode : {2}</strong><br>
                 <strong>User : {3}</strong><br>
     
-                <strong>Transaction Batch : {4}</strong><br>
+                <strong>Transaction Batch : {4}</stcrong><br>
                 <p>Thanks For Choosing Zealkoin.ltd</p>
                 <p></p><br>
                 <a href="zealkoin.ltd">zealkoin.ltd</a><br>
