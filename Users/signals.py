@@ -8,8 +8,8 @@ from wallet.models import Wallet
 def create_user_related(sender, instance, created, **kwargs):
 
     if created:
-        pass
-        #Wallet.objects.create(user = instance)
-        #Settings.objects.create(user=instance)
+   
+        Wallet.objects.create(user = instance)
+        Settings.objects.create(user=instance)
 
 
