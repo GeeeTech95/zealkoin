@@ -8,6 +8,6 @@ class UsersConfig(AppConfig):
 
     def ready(self) :
         from . import signals
-        request_finished.connect(signals.create_user_related, sender=get_user_model())    
+        #request_finished.connect(signals.create_user_related, sender=get_user_model())    
 
 

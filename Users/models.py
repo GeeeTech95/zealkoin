@@ -74,6 +74,9 @@ class User(AbstractUser) :
         for investment in due_investments :
             investment.on_plan_complete()
             
+    def natural_key(self):
+        return (self.pk,)
+
 
 
     @property
@@ -172,3 +175,10 @@ class NewsLaterSubscriber(models.Model) :
 
     def __str__(self)  :
         return self.email
+
+
+
+
+
+
+User.natural_key = User.__str__
