@@ -38,13 +38,13 @@ class User(AbstractUser) :
     phone_number = models.CharField(max_length = 30,blank = False,null = False)
     picture = models.FileField(upload_to = get_path)
     referee = models.ForeignKey('self',blank = True,null=True,related_name ="referral",on_delete = models.SET_NULL)
-    referral_id  = models.CharField(max_length=10,blank = True,editable = False)
+    referral_id  = models.CharField(max_length=30,blank = True,editable = False)
 
     is_admin = models.BooleanField(default = False)
     country = models.ForeignKey(Country,on_delete = models.SET_NULL,null = True)
     
     #payment wallet
-    _wallet_name = models.CharField(max_length=10,null  = True,choices = wallet_choices)
+    _wallet_name = models.CharField(max_length=30,null  = True,choices = wallet_choices)
     _wallet_address = models.CharField(max_length=100,null  = True,help_text = "BEP20 address")
     
     email_verified = models.BooleanField(default= False)
