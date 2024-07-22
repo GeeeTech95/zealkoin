@@ -181,4 +181,4 @@ class NewsLaterSubscriber(models.Model) :
 
 
 
-User.natural_key = User.__str__
+#User.natural_key = User.__str__
