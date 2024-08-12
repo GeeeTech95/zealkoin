@@ -2,7 +2,7 @@
 
 services:
   - type: web
-    plan: starter
+    plan: free
     name: zealkoin
     runtime: python
     buildCommand: "./build.sh"
@@ -11,11 +11,11 @@ services:
       
       - key: SECRET_KEY
         generateValue: true
-      - key: WEB_CONCURRENCY
+      - key: WEB_CONCURRENCY 
         value: 4
 
       - key: DATABASE_URL      
-        value: postgresql://arcticxpress:Wdbtdpe51sbQsroUeLrTFgvVOk3Qe5O1@dpg-cqcne9tumphs73fhfmeg-a/zealkoin
+        value: postgresql://arcticxpress:Wdbtdpe51sbQsroUeLrTFgvVOk3Qe5O1@dpg-cqcne9tumphs73fhfmeg-a.oregon-postgres.render.com/zealkoin
 
 
 
